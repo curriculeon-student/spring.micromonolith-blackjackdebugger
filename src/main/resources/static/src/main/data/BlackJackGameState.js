@@ -9,10 +9,6 @@ class BlackJackGameState {
         this.deck.shuffle();
     }
 
-    isCurrentPlayerDealer() {
-        return this.currentPlayer == this.dealer;
-    }
-
     getDealer() {
         return this.dealer;
     }
@@ -33,7 +29,10 @@ class BlackJackGameState {
         return this.currentPlayer;
     }
 
-    
+    isCurrentPlayerDealer() {
+        return this.currentPlayer == this.dealer;
+    }
+
     hit() {
         // pop a card from the this.deck to the current player
         // check if current player new points are over 21
@@ -58,6 +57,39 @@ class BlackJackGameState {
         this.dealer.hit(deck);
         this.player.hit(deck);
         this.player.hit(deck);
+    }
+
+    getWinner() {
+        const player = this.getPlayer();
+        const dealer = this.getDealer();
+        const playerHand = player.getHandTotal();
+        const dealerHand = dealer.getHandTotal();
+        const didPlayerBust = playerHand > 21;
+        const didDealerBust = dealerHand > 21;
+        const didPlayerHave21 = playerHand == 21;
+        const didDealerHave21 = dealerHand == 21;
+        const didNeitherBust = !didDealerBust && !didPlayerBust;
+        const didPlayerWin = didNeitherBust && didPlayerHave21;
+        const didDealerWin = didNeitherBust && didDealerHave21;
+
+        if(didPlayerWin) {
+            return player;
+        } else if(didDealerWin) {
+            return dealer;
+        }
+
+        return null;
+    }
+
+    getLoser() {
+        const player = this.getPlayer();
+        const dealer = this.getDealer();
+        if(this.getWinner() == player) {
+            return dealer;
+        } else if(this.getWinner() == dealer) {
+            return player;
+        }
+        return null;
     }
 
     toString() {

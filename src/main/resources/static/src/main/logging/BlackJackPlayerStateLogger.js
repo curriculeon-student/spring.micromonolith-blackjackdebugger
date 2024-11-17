@@ -24,7 +24,7 @@ class BlackJackPlayerStateLogger {
     getHandTotal() {
         console.log(this.playerData.name + " is computing hand total.")
         const handTotal = this.playerData.getHandTotal();
-        console.log(this.playerData.name + " has computed hand total.")
+        console.log(this.playerData.name + " has computed hand total. (" + handTotal +")")
         return handTotal;
     }
 

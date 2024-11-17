@@ -12,6 +12,11 @@ class BlackJackGameStateLogger {
         log("Current player is " + (outcome ? "" : "not") + " last player.")
     }
 
+    getWinner() {
+        log("Winner is " + this.blackJackGameData.getWinner());
+        return this.blackJackGameData.getWinner();
+    }
+
     getPlayer() {
         log("Player is " + this.blackJackGameData.getPlayer())
         return this.blackJackGameData.getPlayer();
@@ -46,6 +51,10 @@ class BlackJackGameStateLogger {
 
     hit() {
         this.blackJackGameData.hit();
+    }
+
+    isCurrentPlayerDealer() {
+        return this.blackJackGameData.isCurrentPlayerDealer();
     }
 
     play() {

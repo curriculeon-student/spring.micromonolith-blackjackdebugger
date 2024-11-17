@@ -59,24 +59,13 @@ class BlackJackGameView {
         document.getElementById("deckcount").innerHTML = numberOfCards;
     }
 
-    checkAndUpdateWinner() {
-        if (this.blackJackGameData.getCurrentPlayer().getHandTotal() > 21) {
-            const winnerElement = document.getElementById("winner");
-            winnerElement.innerHTML = "Player: " + this.blackJackGameData.getCurrentPlayer().name + " LOST";			
-            winnerElement.style.display = "inline-block";
-            this.endGame()
-        }
-    }
-
     endGame() {
-        let winner = this.blackJackGameData.getDealer();
-        const dealerScore = this.blackJackGameData.getDealer().getHandTotal();
-        const playerScore = this.blackJackGameData.getPlayer().getHandTotal();
-        if (playerScore > dealerScore && playerScore < 22) {
-            winner = player;
-        }
+        const winner = this.blackJackGameData.getWinner();
+        const winnerElement = document.getElementById("winner");
+        winnerElement.innerHTML = "Player: " + this.blackJackGameData.getCurrentPlayer().name + " LOST";
+        winnerElement.style.display = "inline-block";
         document.getElementById("game-options").style.display = "none";
-        document.getElementById("winner").innerHTML = "Winner: Player " + winner.name;
+        document.getElementById("winner").innerHTML = "Winner: " + winner.name;
         document.getElementById("winner").style.display = "inline-block";
     }
 
