@@ -18,7 +18,9 @@ class BlackJackGame {
 
     hit() {
         this.blackJackGameData.hit();
-        this.updateView();
+        if(this.blackJackGameData.getCurrentPlayer().getHandTotal() >= 21) {
+            this.blackJackGameDataView.endGame();
+        }
     }
 
     stay() {
